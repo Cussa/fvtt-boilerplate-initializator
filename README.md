@@ -20,3 +20,10 @@ A Foundry VTT initializator for the Boilerplate system!
         - `boilerplate` => your system name in lower case
         - `BOILERPLATE` => your system name in upper case
         - `Boilerplate` => your system name capitalized
+
+## What does it does?
+- Checks if the `system.json` file exists. If not download and extract the latest version of the `boilerplate` system, and then deletes the zip file
+- Asks for the system name. Because it will replace in several places, including classes names, using special characters can cause issues.
+- Renames all the files that have the `boilerplate` in the name
+- Changes all files' content using the patterns mentioned above
+- Deletes this file
