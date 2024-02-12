@@ -36,3 +36,11 @@ A Foundry VTT initializator for the Boilerplate system!
 - Renames all the files that have the `boilerplate` in the name
 - Changes all files' content using the patterns mentioned above
 - Deletes this file
+
+# Changelog
+
+## v1.1.0
+- ✨ Handles if the repository already contains README, LICENSE and CHANGELOG
+
+## v1.0.0
+- 🎉 Begin the project!

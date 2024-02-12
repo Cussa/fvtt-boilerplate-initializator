@@ -30,9 +30,25 @@ Dry run activate: {dryRun}
 All changes are case sensitive.
 """)
 
+extensions = [ "", ".md", ".txt"]
+specialFiles = { 
+    "README": "",
+    "LICENSE": "",
+    "CHANGELOG": ""
+}
+
 if os.path.exists("system.json"):
     print("- system.json found! Will not download the boilerplate!")
 else:
+    for key in specialFiles.keys():
+        for extension in extensions:
+            currentFile = f"{key}{extension}"
+            if os.path.exists(currentFile):
+                newFile = f'{key}_ORIGINAL{extension}'
+                specialFiles[key] = newFile
+                os.rename(currentFile, newFile)
+                break
+
     print("- Downloading boilerplate system")
     urllib.request.urlretrieve("https://gitlab.com/asacolips-projects/foundry-mods/boilerplate/-/archive/master/boilerplate-master.zip", "boilerplate.zip")
     with zipfile.ZipFile("boilerplate.zip", 'r') as zip_ref:
@@ -40,6 +56,17 @@ else:
     copy_tree("boilerplate-master", folder)
     shutil.rmtree("boilerplate-master")
     os.remove("boilerplate.zip")
+    for key, value in specialFiles.items():
+        if not value:
+            continue
+
+        for extension in extensions:
+            currentFile = f"{key}{extension}"
+            if os.path.exists(currentFile):
+                os.rename(currentFile, f'{key}_BOILERPLATE{extension}')
+                break
+        os.rename(value, value.replace("_ORIGINAL", ""))
+            
 
 systemName = input("Replace Boilerplate by => ")
 boilerplateLowercase = systemName.lower() # input("boilerplate => ")
