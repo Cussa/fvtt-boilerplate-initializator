@@ -127,4 +127,5 @@ for path in pathiter:
             os.rename(path,newname)
         print(f'Renamin file from "{path[folderPrintIndex:]}" to "{newname[folderPrintIndex:]}"')
 
-os.remove(args[0])
+if not dryRun:
+    os.remove(args[0])
